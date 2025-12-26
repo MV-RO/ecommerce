@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce Website</title>
+    <script src="https://kit.fontawesome.com/45b610ea29.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="header">
+        <a href="#"><img src="img/logo.jpg" class="LOGO"></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="lg-bag"><a class="active" href="cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="page-header">
+        <h2>StayHome</h2>
+        <p class="save">Save more with coupons & up to 60% off!</p>
+    </section>    
+
+    <section id="cart" class="section-p1">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td><b> Image </b></td>
+                    <td><b> Product </b></td>
+                    <td><b> Price </b></td>
+                    <td><b> Quantity </b></td>
+                    <td><b> Subtotal </b></td>
+                    <td><b> Remove </b></td>
+                </tr>
+            </thead>
+        </table>
+    </section>
+
+    <section id="cart-add" class="section-p1">
+    <div class="coupon">
+        <h3>Apply Coupon</h3>
+        <input type="text" id="couponCode" placeholder="Enter coupon code">
+        <button onclick="applyCoupon()">Apply</button>
+        <p id="couponMsg"></p>
+    </div>
+
+    <div class="subtotal">
+        <h3>Cart Totals</h3>
+        <table>
+            <tr>
+                <td>Cart Subtotal</td>
+                <td id="cartSubtotal">₹0</td>
+            </tr>
+            <tr>
+                <td>Discount</td>
+                <td id="cartDiscount">₹0</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong id="cartTotal">₹0</strong></td>
+            </tr>
+        </table>
+
+        <button class="normal" onclick="openCheckout()">Proceed to Checkout</button>
+        <button class="normal" onclick="clearCart()">Clear Cart</button>
+    </div>
+    </section>
+
+    <div id="checkoutModal" class="checkout-modal">
+
+        <div class="checkout-box">
+        <span class="close-btn" onclick="closeCheckout()">×</span>
+
+        <!-- STEP 1: CUSTOMER DETAILS -->
+        <div class="checkout-step active" id="step-1">
+            <h2>Customer Details</h2>
+            <input type="text" id="custName" placeholder="Full Name" required>
+            <input type="email" id="custEmail" placeholder="Email" required>
+            <input type="tel" id="custPhone" placeholder="Phone Number" required>
+            <button onclick="goToStep(2, true)">Proceed</button>
+        </div>
+
+        <!-- STEP 2: DELIVERY ADDRESS -->
+        <div class="checkout-step" id="step-2">
+            <h2>Delivery Address</h2>
+            <textarea id="custAddress" placeholder="Full Address" required></textarea>
+            <input type="text" id="custCity" placeholder="City" required>
+            <input type="text" id="custPincode" placeholder="Pincode" required>
+            <button onclick="goToStep(1, false)">Back</button>
+            <button onclick="goToStep(3, true)">Next</button>
+        </div>
+
+        <!-- STEP 3: ORDER SUMMARY -->
+        <div class="checkout-step" id="step-3">
+            <h2>Order Summary</h2>
+            <div id="orderSummary"></div>
+            <button onclick="goToStep(2, false)">Back</button>
+            <button onclick="goToStep(4, true)">Next</button>
+        </div>
+
+        <!-- STEP 4: PAYMENT OPTIONS -->
+        <div class="checkout-step" id="step-4">
+            <h2>Payment Method</h2>
+
+            <label>
+                <input type="radio" name="payment" value="cod" checked>
+                Cash on Delivery
+            </label>
+
+            <label>
+                <input type="radio" name="payment" value="card">
+                Credit / Debit Card
+            </label>
+
+            <div class="payment-box" id="cardBox">
+                <input type="text" placeholder="Card Number">
+                <input type="text" placeholder="Expiry MM/YY">
+                <input type="text" placeholder="CVV">
+            </div>
+
+            <label>
+                <input type="radio" name="payment" value="upi">
+                UPI / Wallet
+            </label>
+
+            <div class="payment-box" id="upiBox">
+                <input type="text" placeholder="UPI ID (example@upi)">
+            </div>
+
+            <button onclick="goToStep(3, false)">Back</button>
+            <button onclick="placeOrder()">Place Order</button>
+        </div>
+        </div>
+    </div>
+
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="img/newlogo.jpg" alt="">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> 801 VIP Road, Street 23, Raipur</p>
+            <p><strong>Phones: </strong> +01 2234 567 /(+91) 01234 56789</p>
+            <p><strong>Hours: </strong>10:00 - 18:00, Mon - Sat</p>
+            <div class="follow"> 
+                <h4>Follow Us</h4>
+                <div class="icon">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-pinterest-p"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="login.html">Sign In</a>
+            <a href="cart.html">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col payments">
+            <h4>Payments</h4>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay1.png" alt="">           
+        </div>
+
+        <div class="copyright">
+            <p>© 2023, Mvro etc - HTML CSS Ecommerce Template</p>
+        </div>
+    </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
